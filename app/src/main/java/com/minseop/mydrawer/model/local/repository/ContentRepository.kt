@@ -18,9 +18,9 @@ class ContentRepository(application: Application) : Repository<Video> {
 
     override fun insert(video: Video) {
         try {
-            val thread = Thread(Runnable {
+            val thread = Thread {
                 videoDao.insert(video)
-            })
+            }
             thread.start()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -29,9 +29,9 @@ class ContentRepository(application: Application) : Repository<Video> {
 
     override fun delete(video: Video) {
         try {
-            val thread = Thread(Runnable {
+            val thread = Thread{
                 videoDao.delete(video)
-            })
+            }
             thread.start()
         } catch (e: Exception) {
             e.printStackTrace()

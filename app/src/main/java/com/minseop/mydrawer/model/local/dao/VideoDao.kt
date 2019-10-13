@@ -6,7 +6,7 @@ import com.minseop.mydrawer.model.local.entity.Video
 
 @Dao
 interface VideoDao {
-    @Query("SELECT * FROM video ORDER BY title ASC")
+    @Query("SELECT * FROM video ORDER BY id ASC")
     fun getAll(): LiveData<List<Video>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

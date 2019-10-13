@@ -1,12 +1,18 @@
 package com.minseop.mydrawer.ui
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.minseop.mydrawer.R
+import com.minseop.mydrawer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val bind by lazy {
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+    }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         val navController = Navigation.findNavController(MainActivity@this, R.id.nav_host_fragment)
@@ -29,8 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        bind.lifecycleOwner = this@MainActivity
+        bind.navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
     }
 }

@@ -1,17 +1,11 @@
 package com.minseop.mydrawer.ui.dashboard.adapter.view
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.minseop.mydrawer.R
-import com.minseop.mydrawer.model.local.entity.Video
-import kotlinx.android.synthetic.main.item_text.view.*
+import com.minseop.mydrawer.databinding.ItemTextBinding
 
-class TextViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.item_text, parent, false)) {
+class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
-    fun bind(item: Video) {
-        itemView.tv_title.text = item.title
-    }
 
+    val binding: ItemTextBinding = ItemTextBinding.bind(view)
 }

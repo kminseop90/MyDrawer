@@ -1,41 +1,19 @@
 package com.minseop.mydrawer.ui
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.ui.NavigationUI
 import com.minseop.mydrawer.R
 import com.minseop.mydrawer.databinding.ActivityMainBinding
+import com.minseop.mydrawer.ui.base.BaseActivity
+import com.minseop.mydrawer.viewmodel.MainActivityViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>() {
 
-    private val bind by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-    }
+    override fun getViewModelCls(): Class<MainActivityViewModel> = MainActivityViewModel::class.java
 
-    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        val navController = Navigation.findNavController(MainActivity@this, R.id.nav_host_fragment)
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                navController.navigate(R.id.nav_main_to_home)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_dashboard -> {
-                navController.navigate(R.id.nav_main_to_dashboard)
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
-                navController.navigate(R.id.nav_main_to_setting)
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
-    }
+    override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bind.lifecycleOwner = this@MainActivity
-        bind.navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+    override fun initialize() {
+        NavigationUI.setupWithNavController(binding.navView, Navigation.findNavController(this, R.id.nav_host_fragment))
     }
 }

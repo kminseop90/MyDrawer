@@ -1,13 +1,12 @@
 package com.minseop.mydrawer.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.minseop.mydrawer.model.local.entity.Video
 import com.minseop.mydrawer.model.local.repository.ContentRepository
+import com.minseop.mydrawer.ui.base.BaseViewModel
 
-class DashBoardViewModel(application: Application): AndroidViewModel(application) {
-    private val repository = ContentRepository(application)
+class DashBoardViewModel:  BaseViewModel() {
+    private val repository = ContentRepository()
     private val videos = repository.getAll()
 
     fun getAll(): LiveData<List<Video>> = this.videos

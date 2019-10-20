@@ -1,50 +1,24 @@
 package com.minseop.mydrawer.ui.dashboard
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.minseop.mydrawer.R
 import com.minseop.mydrawer.databinding.FragmentDashboardBinding
 import com.minseop.mydrawer.model.local.entity.Video
+import com.minseop.mydrawer.ui.base.BaseFragment
 import com.minseop.mydrawer.ui.dashboard.adapter.DashBoardAdapter
 import com.minseop.mydrawer.viewmodel.DashBoardViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DashBoardFragment: Fragment() {
+class DashBoardFragment : BaseFragment<FragmentDashboardBinding, DashBoardViewModel>() {
 
-    private lateinit var dashboardViewModel: DashBoardViewModel
-    lateinit var binding: FragmentDashboardBinding
+    override fun getViewModelCls(): Class<DashBoardViewModel> = DashBoardViewModel::class.java
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate<FragmentDashboardBinding>(inflater, R.layout.fragment_dashboard, container, false)
-        return binding.root
-    }
+    override fun getLayoutId(): Int = R.layout.fragment_dashboard
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializeViews()
-    }
+    override val viewModel by viewModel<DashBoardViewModel>()
 
-    private fun initializeViews() {
-        binding.dashboardList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = DashBoardAdapter()
-            setHasFixedSize(true)
-        }
-
-        dashboardViewModel = ViewModelProviders.of(this).get(DashBoardViewModel::class.java)
-        dashboardViewModel.getAll().observe(this, Observer {
-            (binding.dashboardList.adapter as DashBoardAdapter).setVideos(it)
-        })
-
-        binding.btnAddDashboard.setOnClickListener {
-            addItem()
-        }
+    override fun initialize() {
     }
 
     fun addItem() {
@@ -52,34 +26,20 @@ class DashBoardFragment: Fragment() {
         video.title = "Naver"
         video.description = "portal"
         video.url = "https://naver.com"
-        dashboardViewModel.insert(video)
-    }
-//
-//    @BindingAdapter("viewModel")
-//    fun setViewModel(view: RecyclerView, vm: DashBoardViewModel) {
-//        view.adapter?.run {
-//            if(this is DashBoardAdapter)
-//                this.setViewModel(vm)
-//        } ?: run {
-//            DashBoardAdapter().apply {
-//                view.adapter = this
-//                this.setViewModel(vm)
-//            }
-//        }
-//    }
 
-//    @BindingAdapter("repositories")
-//    fun setRepositories(view: RecyclerView, items: List<Video>) {
-//        view.adapter?.run {
-//            if(this is DashBoardAdapter) {
-//                this.setVideos(items)
-//                this.notifyDataSetChanged()
-//            }
-//        } ?: run {
-//            DashBoardAdapter().apply {
-//                view.adapter = this
-//                this.setVideos(items)
-//            }
-//        }
-//    }
+        viewModel.insert(video)
+    }
+
+    @BindingAdapter("viewModel")
+    fun setViewModel(view: RecyclerView, vm: DashBoardViewModel) {
+        view.adapter?.run {
+            if (this is DashBoardAdapter)
+                this.setViewModel(vm)
+        } ?: run {
+            DashBoardAdapter().apply {
+                view.adapter = this
+                this.setViewModel(vm)
+            }
+        }
+    }
 }

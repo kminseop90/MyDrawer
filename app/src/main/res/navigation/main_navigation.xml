@@ -5,23 +5,6 @@
             android:id="@+id/main_navigation"
             app:startDestination="@id/home_fragment">
 
-    <activity android:id="@+id/mainActivity"
-              android:name="com.minseop.mydrawer.ui.MainActivity"
-              android:label="MainActivity"
-              tools:layout="@layout/activity_main"/>
-
-    <action
-            android:id="@+id/nav_main_to_dashboard"
-            app:destination="@id/dashboard_fragment"/>
-
-    <action
-            android:id="@+id/nav_main_to_setting"
-            app:destination="@id/setting_fragment"/>
-
-    <action
-            android:id="@+id/nav_main_to_home"
-            app:destination="@id/home_fragment"/>
-
     <fragment android:id="@+id/dashboard_fragment"
               tools:layout="@layout/fragment_dashboard"
               android:name="com.minseop.mydrawer.ui.dashboard.DashBoardFragment"

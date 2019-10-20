@@ -6,6 +6,5 @@ import com.minseop.mydrawer.databinding.ItemTextBinding
 
 class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
-
     val binding: ItemTextBinding = ItemTextBinding.bind(view)
 }

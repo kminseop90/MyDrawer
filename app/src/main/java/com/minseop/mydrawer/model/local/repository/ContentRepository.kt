@@ -1,13 +1,13 @@
 package com.minseop.mydrawer.model.local.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
+import com.minseop.mydrawer.MyDrawerApplication
 import com.minseop.mydrawer.model.local.dao.VideoDao
 import com.minseop.mydrawer.model.local.database.ContentDatabase
 import com.minseop.mydrawer.model.local.entity.Video
 
-class ContentRepository(application: Application) : Repository<Video> {
-    private val contentDatabase = ContentDatabase.getInstance(application)!!
+class ContentRepository : Repository<Video> {
+    private val contentDatabase = ContentDatabase.getInstance(MyDrawerApplication.context)!!
 
     private val videoDao: VideoDao = contentDatabase.videoDao()
 

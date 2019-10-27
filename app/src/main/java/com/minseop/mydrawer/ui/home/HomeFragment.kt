@@ -1,15 +1,36 @@
 package com.minseop.mydrawer.ui.home
 
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.content.Intent
+import android.os.Build
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.minseop.mydrawer.R
+import com.minseop.mydrawer.databinding.FragmentHomeBinding
+import com.minseop.mydrawer.service.ClipboardService
+import com.minseop.mydrawer.ui.base.BaseFragment
+import com.minseop.mydrawer.viewmodel.HomeViewModel
 
-class HomeFragment: Fragment() {
+class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override fun getViewModelCls(): Class<HomeViewModel> = HomeViewModel::class.java
+
+    override fun getLayoutId(): Int = R.layout.fragment_home
+
+    override fun initialize() {
+    }
+
+
+    fun onStartServiceClick(view: View) {
+        val intent = Intent(context, ClipboardService::class.java)
+        if(Build.VERSION.SDK_INT >= 26) {
+            context?.startForegroundService(intent)
+        } else {
+            context?.startService(intent)
+        }
+
+    }
+
+    fun onStopServiceClick(view: View) {
+        val intent = Intent(context, ClipboardService::class.java)
+        context?.stopService(intent)
     }
 }

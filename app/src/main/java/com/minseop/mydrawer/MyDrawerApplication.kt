@@ -9,7 +9,6 @@ import org.koin.core.context.startKoin
 
 class MyDrawerApplication: Application() {
 
-
     companion object {
         lateinit var context: Context
     }

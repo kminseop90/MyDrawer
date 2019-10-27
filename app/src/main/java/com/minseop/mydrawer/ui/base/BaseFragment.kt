@@ -8,11 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel> : Fragment() {
 
     lateinit var binding: B
-    protected abstract val viewModel : VM
+    protected val viewModel : VM by viewModel(clazz = getViewModelCls().kotlin)
 
     abstract fun getLayoutId(): Int
     abstract fun getViewModelCls(): Class<VM>
@@ -22,6 +23,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel> : Fragment(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         binding.setVariable(BR.vm, viewModel)
+        binding.setVariable(BR.fragment, this)
         binding.lifecycleOwner = this
         return binding.root
     }

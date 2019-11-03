@@ -4,7 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="item" type="com.minseop.mydrawer.model.local.entity.Video"/>
+        <variable name="item" type="com.minseop.mydrawer.model.local.entity.Content"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
             android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="16sp"
                 android:id="@+id/tv_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -20,12 +21,24 @@
                 android:layout_height="wrap_content"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="16sp"
                 android:id="@+id/tv_des"
-                app:layout_constraintLeft_toRightOf="@id/tv_title"
-                app:layout_constraintBaseline_toBaselineOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
                 android:text="@{item.description}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="16sp"
+                android:id="@+id/tv_url"
+                app:layout_constraintTop_toBottomOf="@id/tv_des"
+                app:layout_constraintLeft_toLeftOf="@id/tv_des"
+                android:text="@{item.url}"
+                android:autoLink="web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

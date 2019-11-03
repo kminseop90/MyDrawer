@@ -5,7 +5,7 @@ import com.minseop.mydrawer.model.local.entity.Content
 import com.minseop.mydrawer.model.local.repository.ContentRepository
 import com.minseop.mydrawer.ui.base.BaseViewModel
 
-class DashBoardViewModel:  BaseViewModel() {
+class ClipboardViewModel:  BaseViewModel() {
     private val repository = ContentRepository()
     private val videos = repository.getAll()
 

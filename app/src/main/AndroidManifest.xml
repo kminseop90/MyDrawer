@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".service.ClipboardService"/>
+        <service android:name=".service.clipboard.ClipboardService"/>
     </application>
 
 </manifest>

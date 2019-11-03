@@ -2,24 +2,24 @@ package com.minseop.mydrawer.model.local.repository
 
 import androidx.lifecycle.LiveData
 import com.minseop.mydrawer.MyDrawerApplication
-import com.minseop.mydrawer.model.local.dao.VideoDao
+import com.minseop.mydrawer.model.local.dao.ContentDao
 import com.minseop.mydrawer.model.local.database.ContentDatabase
-import com.minseop.mydrawer.model.local.entity.Video
+import com.minseop.mydrawer.model.local.entity.Content
 
-class ContentRepository : Repository<Video> {
+class ContentRepository : Repository<Content> {
     private val contentDatabase = ContentDatabase.getInstance(MyDrawerApplication.context)!!
 
-    private val videoDao: VideoDao = contentDatabase.videoDao()
+    private val contentDao: ContentDao = contentDatabase.videoDao()
 
-    private val videos: LiveData<List<Video>> = videoDao.getAll()
+    private val contents: LiveData<List<Content>> = contentDao.getAll()
 
 
-    override fun getAll(): LiveData<List<Video>> = videos
+    override fun getAll(): LiveData<List<Content>> = contents
 
-    override fun insert(video: Video) {
+    override fun insert(content: Content) {
         try {
             val thread = Thread {
-                videoDao.insert(video)
+                contentDao.insert(content)
             }
             thread.start()
         } catch (e: Exception) {
@@ -27,10 +27,10 @@ class ContentRepository : Repository<Video> {
         }
     }
 
-    override fun delete(video: Video) {
+    override fun delete(content: Content) {
         try {
             val thread = Thread{
-                videoDao.delete(video)
+                contentDao.delete(content)
             }
             thread.start()
         } catch (e: Exception) {

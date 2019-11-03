@@ -2,16 +2,16 @@ package com.minseop.mydrawer.ui.dashboard.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.minseop.mydrawer.model.local.entity.Video
+import com.minseop.mydrawer.model.local.entity.Content
 import com.minseop.mydrawer.ui.dashboard.adapter.view.TextViewHolder
 
 
 class DashBoardAdapter : RecyclerView.Adapter<TextViewHolder>() {
 
-    private var videos: List<Video> = listOf()
+    private var contents: List<Content> = listOf()
 
-    fun setVideos(videos: List<Video>) {
-        this.videos = videos
+    fun setVideos(contents: List<Content>) {
+        this.contents = contents
         notifyDataSetChanged()
     }
 
@@ -19,11 +19,9 @@ class DashBoardAdapter : RecyclerView.Adapter<TextViewHolder>() {
         return TextViewHolder.newInstance(parent)
     }
 
-    override fun getItemCount(): Int = videos.size
+    override fun getItemCount(): Int = contents.size
 
     override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
-        holder.onBind(videos[position])
+        holder.onBind(contents[position])
     }
-
-
 }

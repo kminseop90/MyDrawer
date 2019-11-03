@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.minseop.mydrawer.R
 import com.minseop.mydrawer.databinding.ItemTextBinding
-import com.minseop.mydrawer.model.local.entity.Video
+import com.minseop.mydrawer.model.local.entity.Content
 import com.minseop.mydrawer.ui.base.BaseViewHolder
 
-class TextViewHolder(view: View) : BaseViewHolder<ItemTextBinding, Video>(view) {
+class TextViewHolder(view: View) : BaseViewHolder<ItemTextBinding, Content>(view) {
 
     companion object {
         fun newInstance(parent: ViewGroup?): TextViewHolder {
@@ -17,7 +17,7 @@ class TextViewHolder(view: View) : BaseViewHolder<ItemTextBinding, Video>(view) 
         }
     }
 
-    override fun onBind(item: Video) {
+    override fun onBind(item: Content) {
         binding.item = item
     }
 }

@@ -1,4 +1,4 @@
-package com.minseop.mydrawer.service
+package com.minseop.mydrawer.service.clipboard
 
 import android.R
 import android.app.NotificationChannel
@@ -10,6 +10,8 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.minseop.mydrawer.model.local.entity.Content
+import com.minseop.mydrawer.model.local.repository.ContentRepository
 import com.minseop.mydrawer.ui.MainActivity
 import com.minseop.mydrawer.util.ClipboardUtils
 import com.orhanobut.logger.Logger
@@ -17,10 +19,11 @@ import com.orhanobut.logger.Logger
 
 class ClipboardService : Service() {
 
+    private val contentRepository = ContentRepository()
+
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
-
 
     override fun onCreate() {
         super.onCreate()
@@ -29,8 +32,9 @@ class ClipboardService : Service() {
     }
 
     private fun addClipBoardEvent() {
-        ClipboardUtils.startClipBoardEventCatch {
-            Logger.d(it?.text)
+        ClipboardUtils.startClipBoardEventCatch { text, type ->
+            Logger.d(text)
+            contentRepository.insert(Content(null, url = text ?: ""))
         }
     }
 

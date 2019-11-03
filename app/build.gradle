@@ -51,5 +51,7 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-androidx-ext:$koin_version"
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     implementation 'com.orhanobut:logger:2.2.0' //현재 최신버전
 }

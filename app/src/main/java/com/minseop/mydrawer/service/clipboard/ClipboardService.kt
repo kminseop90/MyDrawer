@@ -14,7 +14,6 @@ import com.minseop.mydrawer.model.local.entity.Content
 import com.minseop.mydrawer.model.local.repository.ContentRepository
 import com.minseop.mydrawer.ui.MainActivity
 import com.minseop.mydrawer.util.ClipboardUtils
-import com.orhanobut.logger.Logger
 
 
 class ClipboardService : Service() {
@@ -33,8 +32,7 @@ class ClipboardService : Service() {
 
     private fun addClipBoardEvent() {
         ClipboardUtils.startClipBoardEventCatch { text, type ->
-            Logger.d(text)
-            contentRepository.insert(Content(null, url = text ?: ""))
+            contentRepository.insert(Content(null, url = text ?: "", type = type.index))
         }
     }
 

@@ -16,7 +16,11 @@ data class Content(
     var description: String = "",
 
     @ColumnInfo(name = "url")
-    var url: String = ""
+    var url: String = "",
+
+    @ColumnInfo(name = "type")
+    var type: Int = 0
+
 ) {
-    constructor(): this(null,"", "","")
+    constructor(): this(null,"", "","", 0)
 }

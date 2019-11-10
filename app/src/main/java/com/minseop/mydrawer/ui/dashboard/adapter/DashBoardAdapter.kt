@@ -4,24 +4,28 @@ import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.minseop.mydrawer.model.local.entity.Content
+import com.minseop.mydrawer.service.clipboard.ContentType
 import com.minseop.mydrawer.ui.base.BaseViewHolder
 import com.minseop.mydrawer.ui.dashboard.adapter.view.ImageViewHolder
 import com.minseop.mydrawer.ui.dashboard.adapter.view.TextViewHolder
+import com.minseop.mydrawer.ui.dashboard.adapter.view.VideoViewHolder
 
 
 class DashBoardAdapter : RecyclerView.Adapter<BaseViewHolder<ViewDataBinding, Content>>() {
 
     private var contents: List<Content> = listOf()
 
-    fun setVideos(contents: List<Content>) {
-        this.contents = contents
+    fun setContent(contents: List<Content>?) {
+        this.contents = contents ?: listOf()
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewDataBinding, Content> {
         return when(viewType) {
-            0 -> TextViewHolder.newInstance(parent)
-            1 -> ImageViewHolder.newInstance(parent)
+            ContentType.PAGE.index -> TextViewHolder.newInstance(parent)
+            ContentType.IMAGE.index -> ImageViewHolder.newInstance(parent)
+            ContentType.VIDEO.index -> VideoViewHolder.newInstance(parent)
+            ContentType.YOUTUBE.index -> VideoViewHolder.newInstance(parent)
             else -> TextViewHolder.newInstance(parent)
         }
     }

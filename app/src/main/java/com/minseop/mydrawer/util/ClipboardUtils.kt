@@ -4,6 +4,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import com.minseop.mydrawer.MyDrawerApplication
 import com.minseop.mydrawer.service.clipboard.ContentType
+import com.orhanobut.logger.Logger
 
 object ClipboardUtils {
 
@@ -26,12 +27,12 @@ object ClipboardUtils {
         for(type in ContentType.values()) {
             for(detailType in type.value) {
                 if(extensionWord == detailType) {
-                    com.orhanobut.logger.Logger.d(type)
+                    Logger.d(type)
                     return type
                 }
             }
         }
-        return ContentType.PAGE
+        return ContentType.YOUTUBE
     }
 
     fun getExtension(text: String): String {
